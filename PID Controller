@@ -1,0 +1,20 @@
+% Define the system parameters
+mb = 250;  mw = 50; Ks = 10000;   Cs = 125;    Kp = 120000;
+% % Define the numerator and denominator coefficients of the transfer function
+% num = [Kp*Cs,   Kp*Ks];  
+% den = [mw*mb,   Cs*(mb+mw),    (mw*Ks+mb*Ks+mb*Kp),    Kp*Cs,  Kp*Ks];
+% sys = tf(num,den); % sys is the transfer function –a MATLAB “object”
+% % Look at the frequency response using Bode plots (angular frequency range -
+% % 100 points between 10-1 and 103 rads/s)
+% w0 = logspace(-1, 3, 100);   figure(1); bode(sys,w0); grid;
+% % Look at a step response from 0 to 10 seconds
+% [y,t] = step(sys, 10);      figure(2); plot(t,y); grid; 
+% Part 1 & 2
+%num = [Cs*Kp, Ks*Kp, 0, 0];
+num = [-mb*Kp, 0, 0];
+den = [mb*mw, Cs*(mb+mw), (mb*Ks+mb*Kp+mw*Ks), Kp*Cs, Kp*Ks];
+
+sys = tf(num,den);
+w0 = logspace(-1, 3, 100);   figure(1); bode(sys,w0); grid;
+% Look at a step response from 0 to 10 seconds
+[y,t] = step(sys, 10);      figure(2); plot(t,y); grid;
